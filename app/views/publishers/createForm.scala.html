@@ -1,0 +1,23 @@
+@(publisherForm: Form[Publisher])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {    
+    <h1 class="heading">Add a publisher</h1>
+    
+    @form(routes.Publishers.save()) {
+        
+        <fieldset>        
+            @inputText(publisherForm("name"), '_label -> "Publisher name")            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add" class="btn primary">  
+            <a href="@routes.Publishers.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

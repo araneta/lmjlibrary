@@ -1,0 +1,6 @@
+$ git init
+$ git add .
+$ git commit -m "init"
+$ heroku create --stack cedar
+heroku config:add BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-scala.git#perm-gen
+git push heroku master

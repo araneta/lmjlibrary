@@ -1,0 +1,26 @@
+
+# Users
+
+users:
+
+    - !!models.User
+        username:   guillaume@sample.com
+        name:       Guillaume Bort
+        password:   secret
+    
+    - !!models.User
+        username:   maxime@sample.com
+        name:       Maxime Dantec
+        password:   secret
+    
+    - !!models.User
+        username:   sadek@sample.com
+        name:       Sadek Drobi
+        password:   secret
+    
+    - !!models.User
+        username:   erwan@sample.com
+        name:       Erwan Loisant
+        password:   secret
+    
+

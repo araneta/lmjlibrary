@@ -1,0 +1,25 @@
+@(content: Html)
+<html>
+    <head>       
+    	<meta charset="utf-8" />
+        <title>LMJ Library</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" >    
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")" >         
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/home.css")" >    
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.1.js")" ></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-play-1.7.1.js")" ></script>                  
+    </head>
+    <body>
+        
+        <header>
+            <a href="" id="logo"><span>Lmj</span>Library</a>
+        </header>       
+        <section id="main">
+            @content
+        </section>
+            
+    </body>
+</html>
+    
+
+

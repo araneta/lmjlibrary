@@ -1,0 +1,19 @@
+@(barcodes:Array[String])
+@imgpath(barcode:String) = @{	
+	"/assets/images/barcode/"+barcode+".png"	
+	//routes.BarcodeImages.getFile(barcode+".png")
+}
+<html>
+<head>
+	<style>
+		.barcodelist li{ float:left; padding:20px;list-style:none outside none;border:thin solid #000;}
+	</style>
+</head>
+<body>
+	<ul class="barcodelist">
+	@for(barcode <- barcodes) {
+	    <li><img src="@imgpath(barcode)" /></li>
+	}
+	</ul>
+</body>
+</html>

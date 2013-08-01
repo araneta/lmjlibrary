@@ -1,0 +1,72 @@
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+	
+@main() {
+<h1 class="heading">Books Transactions</h1>  
+<form>
+<fieldset> 
+	<div id="bookliststatus"></div>
+	<div id="studentinfo">
+		<div class="left">	
+		  	<div class="clearfix ">
+			    <label for="nim">NIM</label>
+			    <div class="input">	        
+			    	<input type="text" value="" name="nim" id="nim" />
+			    	<span id="nimstatus"></span>				        
+			    </div>
+			</div>
+		    <div class="clearfix ">
+			    <label for="name">Name</label>
+			    <div class="input">	        
+			    	<input type="text" readonly="readonly" value="" name="name" id="name" />		        
+			    </div>
+			</div>
+			<div class="clearfix ">
+			    <label for="faculty">Faculty</label>
+			    <div class="input">	        
+			    	<input type="text" readonly="readonly" value="" name="faculty" id="faculty" />		        
+			    </div>
+			</div>
+		</div>
+		<div class="right">
+			<div id="photo"></div>
+		</div>
+	</div>
+	<div id="books">		
+		<div id="barcodeinput">
+	    	<label for="barcode">Barcode</label>		    	       
+    		<input type="text" value="" name="barcode" id="barcode" />		
+    		<span id="barcodestatus"></span>	        
+		 </div>   
+	 	
+		<div id="booktbl">			
+			<table id="booklist">
+			 	<thead>
+			 		<tr>			 		
+						<td width="300">Title</td>
+						<td width="80">Borrow Date</td>
+						<td width="80">Renewal <br />Date</td>
+						<td width="50">Renewal <br />Count</td>
+						<td width="80">Return Date</td>
+						<td width="50">Fine</td>
+						<td width="100">Status</td>
+						<td width="50">Action</td>
+			 		</tr>
+			 	</thead>
+				
+				<tbody>
+				
+				</tbody>
+			</table>
+		</div>	
+		<div class="actions">
+            <input type="button" value="Save" id="btnSave" class="btn primary">  
+            <a id="btnCancel" class="btn">Clear</a> 
+        </div>
+	</div>
+	<input type="hidden" id="student_id" value="" />	
+</fieldset>
+</form>
+<script type="text/javascript" src="/assets/javascripts/borrowing.js"></script>
+}

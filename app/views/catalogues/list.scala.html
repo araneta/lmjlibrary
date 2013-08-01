@@ -1,0 +1,128 @@
+@(bookid:Long,booktitle:String, currentPage: Page[Catalogue], currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.Catalogues.list(bookid,newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main() { 
+    
+    <h1 class="heading" id="homeTitle"><a href="@routes.Books.edit(bookid)">@booktitle</a> : @Messages("catalogues.list.title", currentPage.getTotalRowCount)</h1>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    } 
+
+    <div id="actions">
+        
+        <form action="@link(0, "barcode")" method="GET">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by barcode...">
+            <input type="submit" id="searchsubmit" value="Search" class="btn primary">
+        </form>
+        
+        <a class="btn success" id="add" href="@routes.Catalogues.create(bookid)">Add a new catalogue</a>
+        
+    </div>
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    } else {
+        
+        <table class="computers zebra-striped">
+            <thead>
+                <tr>
+                	<th>Print</th>
+                	@header("id", "Catalogue Id")   
+                    @header("barcode", "Barcode")                    
+                    @header("status", "Status")                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(catalogue <- currentPage.getList) {
+                    <tr>
+                    	<td><input type="checkbox" class="barcodeid" value="@catalogue.barcode" /></td>
+                     	<td>@catalogue.id</td>
+                        <td><a href="@routes.Catalogues.edit(catalogue.id)">@catalogue.barcode</a></td>
+                        <td>@catalogue.status.status</td>                                               
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul>
+                @if(currentPage.hasPrev) {
+                    <li class="prev">
+                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>
+                    </li>
+                } else {
+                    <li class="prev disabled">
+                        <a>&larr; Previous</a>
+                    </li>
+                }
+                <li class="current">
+                    <a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a>
+                </li>
+                @if(currentPage.hasNext) {
+                    <li class="next">
+                        <a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a>
+                    </li>
+                } else {
+                    <li class="next disabled">
+                        <a>Next &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <a class="btn success" onclick="openWindow();return false;" >Print Barcodes</a>
+        <script type="text/javascript">
+        	function openWindow(){
+        		var ids = $('.barcodeid:checked').map(function() {return this.value;}).get().join(',');
+        		var url = "/catalogues/printbarcodes/"+ids;
+        		var popupWindow = window.open(
+        				url,'popUpWindow','resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+        	}
+        </script>
+    }
+        
+}
+
+            

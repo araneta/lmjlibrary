@@ -1,0 +1,21 @@
+2012-12-28 19:30:53,065 - [INFO] - from play in main 
+Listening for HTTP on port 9000...
+
+2012-12-28 19:31:17,817 - [INFO] - from play in play-akka.actor.default-dispatcher-4 
+database [default] connected at jdbc:postgresql://localhost/lmjlibrary?user=lmjlibrary&password=willamette
+
+2012-12-28 19:31:32,094 - [INFO] - from play in play-akka.actor.default-dispatcher-4 
+Application started (Dev)
+
+2012-12-28 19:39:45,957 - [INFO] - from application in play-akka.actor.actions-dispatcher-14 
+barcodepath1:/home/aldo/projects/play/lmjlibrary/public/images/barcode
+
+2012-12-28 20:15:00,449 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+database [default] connected at jdbc:postgresql://localhost/lmjlibrary?user=lmjlibrary&password=willamette
+
+2012-12-28 20:15:07,494 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+Application started (Dev)
+
+2012-12-28 20:21:12,572 - [INFO] - from application in play-akka.actor.actions-dispatcher-18 
+barcodepath1:/media/05beb903-1c3b-4a06-86d8-300b323446db/home/aldo/projects/play/lmjlibrary/public/images/barcode
+

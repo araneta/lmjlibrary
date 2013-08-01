@@ -1,0 +1,27 @@
+@home {        
+    <div id="actions">        
+        <form action="@routes.Library.search(0, "", "", "", "asc")" method="GET">
+        	<span class="st1">Search</span>
+            <input type="search" id="searchbox" name="f" value="" placeholder="keywords...">
+            <span class="st2">in</span>
+            <select name="fb" id="fb">            	
+            	<option value="title">Title</option>
+            	<option value="authors_text">Author</option>            	
+            </select>
+            <div style="clear:both"></div>
+            <span class="st1">Sort by</span>
+       		<select name="s" id="s">            	
+            	<option value="title">Title</option>
+            	<!-- <option value="year">Year</option> -->	            	            	
+            </select>
+            <span class="st2">in</span>
+            <select name="o" id="o">
+            	<option value="asc">Ascending</option>
+            	<option value="desc">Descending</option>	            	            	
+            </select>
+            <input type="submit" id="searchsubmit" value="Search" class="btn primary">
+        </form>        
+    </div>           
+}
+
+            

@@ -1,0 +1,34 @@
+@(id: Long,bookid:Long,booktitle:String,catalogueForm: Form[Catalogue])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {    
+	<h1>@booktitle : Edit a catalogue</h1>
+	
+	@form(routes.Catalogues.update(id,bookid)) {
+	    
+	    <fieldset>        
+	        @inputText(catalogueForm("barcode"), '_label -> "Barcode")
+	        @select(
+                catalogueForm("status.id"), 
+                options(CatalogueStatus.options),  
+                '_label -> "Status",
+                '_showConstraints -> false
+            )          
+             <input type="hidden" name="book.id" value="@bookid" />        	        
+	    </fieldset>
+	    
+	    <div class="actions">
+	        <input type="submit" value="Save" class="btn primary">  
+	        <a href="@routes.Catalogues.list(bookid)" class="btn">Cancel</a> 	               
+	    </div>
+	    
+	}
+	@form(routes.Catalogues.delete(id), 'class -> "topRight") {
+	    <input type="submit" value="Delete" class="btn danger">
+	}
+	
+	
+}

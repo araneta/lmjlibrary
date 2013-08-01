@@ -1,0 +1,38 @@
+@(settingsForm: Form[viewmodels.SettingsForm])
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {
+<style>
+	form .input {
+    	margin-left: 220px;
+	}
+	form label{
+		width:200px;
+	}
+</style>    
+    <h1 class="heading">Edit Settings</h1>
+    @if(flash.containsKey("success")) {
+        <div class="alert-message warning">
+            <strong>Done!</strong> @flash.get("success")
+        </div>
+    } 
+    @form(routes.Settings.save()) {
+        
+        <fieldset>
+        	
+			@inputText(settingsForm("maxBorrowingDay"), '_label -> "Maximum Borrowing Day")
+			@inputText(settingsForm("finePerDay"), '_label -> "Fine PerDay")
+			@inputText(settingsForm("maxRenewalCount"), '_label -> "Maximum Renewal Count")
+			@inputText(settingsForm("dateFormat"), '_label -> "Date Format")
+			@inputText(settingsForm("maxBorrowedBook"), '_label -> "Maximum Borrowed Book")
+			<a class="btn success" id="add" href="@routes.Settings.generateCataloguesCode()">Generate barcodes</a>
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save" class="btn primary">              
+        </div>
+        
+    }    
+}

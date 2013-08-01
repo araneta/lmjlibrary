@@ -1,0 +1,23 @@
+@(authorForm: Form[Author])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {    
+    <h1 class="heading">Add a author</h1>
+    
+    @form(routes.Authors.save()) {
+        
+        <fieldset>        
+            @inputText(authorForm("name"), '_label -> "Author name")            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add" class="btn primary">  
+            <a href="@routes.Authors.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

@@ -1,0 +1,51 @@
+@(form: Form[Application.Login])
+
+<html>
+    <head>
+        <title>Lmj Library</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    </head>
+    <body>
+        
+        <header>
+            <a href="" id="logo"><span>Lmj</span>Library</a>
+        </header>
+        
+        @helper.form(routes.Application.authenticate) {
+            
+            <h1>Sign in</h1>
+            
+            @if(form.hasGlobalErrors) { 
+                <p class="error">
+                    @form.globalError.message
+                </p>
+            }
+            
+            @if(flash.contains("success")) {
+                <p class="success">
+                    @flash.get("success")
+                </p>
+            }
+            
+            <p>
+                <input type="username" name="username" placeholder="Username" value="@form("username").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+            <p>
+                <button type="submit">Login</button>
+            </p>
+            
+        }
+        
+        <p class="note">
+            Try <em>bejo</em> with <em>password</em> as password.
+        </p>
+            
+    </body>
+</html>
+    
+
+

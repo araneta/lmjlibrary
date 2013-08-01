@@ -1,0 +1,32 @@
+@(id: Long,studentForm: Form[Student])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {    
+    <h1 class="heading">Edit a student</h1>
+    
+    @form(routes.Students.update(id)) {
+        
+        <fieldset>
+        	@inputText(studentForm("nim"), '_label -> "NIM")        
+            @inputText(studentForm("name"), '_label -> "Name")                        
+            @select(
+                studentForm("faculty.id"), 
+                options(Faculty.options), 
+                '_label -> "Faculty",
+                '_showConstraints -> false
+            )   
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save" class="btn primary">  
+            <a href="@routes.Students.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    @form(routes.Students.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete" class="btn danger">
+    }
+}

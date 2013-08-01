@@ -1,0 +1,82 @@
+@(id: Long,bookForm: Form[Book],authors:Set[Author])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main() {    
+	<h1 class="heading">Edit a book</h1>
+	
+	@form(routes.Books.update(id)) {
+	    
+	    <fieldset>        
+	        @inputText(bookForm("title"), '_label -> "book title")
+	        <div class="clearfix ">
+			    <label for="author">Publisher Text: </label>
+			    <div class="input">			        
+			    	<span>@bookForm("publisher_text").value()</span>						        
+			    </div>
+			</div>	                         
+	       @select(
+                bookForm("publisher.id"), 
+                options(Publisher.options), 
+                '_label -> "Publisher", '_default -> "-- Choose a publisher --",
+                '_showConstraints -> false
+            )   
+            <div class="clearfix ">
+			    <label for="author">Author(s) Text: </label>
+			    <div class="input">			        
+			    	<span>@bookForm("authors_text").value()</span>						        
+			    </div>
+			</div>
+	         <div class="clearfix ">
+			    <label for="author">Select Author</label>
+			    <div class="input">			        
+			    	<input type="text" value="" name="author" id="author" />			
+			        <span class="help-inline"></span>
+			        <input type="hidden" name="author_ids" id="author_ids" value="@for(author <- authors){ @author.id,}"/>
+		            <div id="authorsbox">
+		            	<span>Selected Author(s):</span>
+		            	<ul id="authors">
+		            	@for(author <- authors) {
+		            		<li id="a@author.id" authorid="@author.id"><span class="authortext">@author.name</span>
+		            			<a href="#" onclick="removeAuthor(@author.id);return false;">Remove</a>
+		           			</li>
+		            	}
+		            	</ul>
+		            </div>
+			    </div>
+			</div>				
+			@inputText(bookForm("publish_year"), '_label -> "Publish Year")    
+            @inputText(bookForm("isbn"), '_label -> "ISBN")
+	        @inputText(bookForm("catalogue_count"), '_label -> "Cataloge Count")
+	    </fieldset>
+	    
+	    <div class="actions">
+	        <input type="submit" value="Save" class="btn primary">  
+	        <a href="@routes.Catalogues.list(id)" class="btn">Catalogue</a> 
+	        <a href="@routes.Books.list()" class="btn">Cancel</a>	        
+	    </div>
+	    
+	}
+	@form(routes.Books.delete(id), 'class -> "topRight") {
+	    <input type="submit" value="Delete" class="btn danger">
+	}
+	<link rel="stylesheet" href="/assets/stylesheets/jquery-ui.css" />		
+		<script src="/assets/javascripts/jquery-ui.js"></script>
+		<script src="/assets/javascripts/book.js"></script>
+		<style>
+	    	.ui-autocomplete-loading {
+	        	background: white url('/assets/images/ui-anim_basic_16x16.gif') right center no-repeat;
+	    	}
+	    	.authortext{
+	    		width:200px;
+	    		display:block;
+	    		float:left;
+	    	}
+	    	#authorsbox{
+	    		padding:10px 0;
+	    	}
+	    </style>	    
+	
+}

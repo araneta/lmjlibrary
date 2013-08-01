@@ -1,0 +1,44 @@
+@(details: viewmodels.BookCatalogueDetails)
+@home {
+	<h1 class="heading">@details.title</h1>
+	
+	<div id="bookimg">
+	</div>
+	<div id="bookdetails">
+		<b>Author(s):</b><br />
+		@details.author<br />
+		<br />
+		<b>Publisher:</b><br />
+		@details.publisher<br />
+		<br />
+		<b>Publish Year:</b><br />
+		@details.publish_year<br />
+		<br />
+		<b>ISBN:</b><br />
+		@details.isbn<br />
+		<br />
+		<b>Exemplar:</b><br />
+		<div id="exemplar">
+			<table>
+				<thead>
+	                <tr>
+	                	<th width="80">Barcode</th>
+	                	<th width="90">Status</th>                    
+	                	<th>Description</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	
+	                @for(catalogue <- details.catalogues) {
+	                    <tr>
+	                     	<td>@catalogue.barcode</td>
+	                        <td>@catalogue.status</td>
+	                        <td>@if(catalogue.status=="Not Available" && catalogue.borrowed_by!=null){ borrowed by : @catalogue.borrowed_by  on  @catalogue.borrowed_date}</td>                                               
+	                    </tr>
+	                }
+	
+	            </tbody>
+			</table>
+		</div>
+	</div>
+}

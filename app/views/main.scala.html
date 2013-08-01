@@ -1,0 +1,61 @@
+@(styles: Html = Html(""),scripts: Html = Html(""))(content: Html)
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8" />
+        <title>LMJ Library</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" >    
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")" >         
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")" >
+        @styles
+            
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.1.js")" ></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-play-1.7.1.js")" ></script>
+        <script type="text/javascript" src='@routes.Application.javascriptRoutes()'></script>   
+       	@scripts 
+    </head>
+    <body>
+        <header>
+            <a href="" id="logo"><span>Lmj</span>Library</a>
+            <dl id="user">
+                <dt>@(session.get("username")) <span>@(session.get("fullname"))</span></dt>
+                <dd>
+                    <a href="@routes.Application.logout()">Logout</a>
+                </dd>
+            </dl>
+        </header>
+        <nav>
+            <h4 class="dashboard"><a href="#/">Dashboard</a></h4>            
+            <ul id="menu">
+            	<li class="main">
+            		<div>Master Data</div>
+            		<ul>
+            			<li><a href="@routes.Publishers.list()">Publisher</a></li>
+            			<li><a href="@routes.Authors.list()">Author</a></li>
+            			<li><a href="@routes.Students.list()">Student</a></li>
+            			<li><a href="@routes.Books.list()">Book</a></li>
+            			<li><a href="@routes.Settings.index()">Settings</a></li>
+            		</ul>
+            	</li>
+            	<li class="main">
+            		<div>Transactions</div>
+            		<ul>
+            			<li><a href="@routes.TransBorrowing.index()">Borrowing</a></li>
+            		</ul>
+            	</li>
+            	<li class="main">
+            		<div>Reports</div>
+            		<ul>
+            			<li><a href="@routes.Reports.borrowedBooks()">Borrowed Books</a></li>
+            			<li><a href="@routes.Reports.returnedBooks()">Returned Books</a></li>
+            			<li><a href="@routes.Reports.overdueBooks()">Overdue Books</a></li>
+            		</ul>
+            	</li>
+            </ul>
+        </nav>
+        <section id="main">
+            @content
+        </section>
+    </body>
+</html>
+

@@ -1,0 +1,98 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# The home page
+GET     /                                   controllers.Library.search(p:Int ?= 0,f ?="",fb ?= "", s ?= "", o ?= "")
+GET		/search								controllers.Library.search(p:Int ?= 0,f ?="",fb ?= "", s ?= "title", o ?= "asc")
+GET		/details/:id						controllers.Library.details(id:Long)
+
+# Authentication
+GET     /login                              controllers.Application.login()
+POST    /login                              controllers.Application.authenticate()
+GET     /logout                             controllers.Application.logout()
+
+#publisher
+GET     /publishers                  		controllers.Publishers.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+GET     /publishers/new              		controllers.Publishers.create()
+POST    /publishers                  		controllers.Publishers.save()
+
+GET     /publishers/:id						controllers.Publishers.edit(id:Long)
+POST    /publishers/:id						controllers.Publishers.update(id:Long)
+
+POST    /publishers/:id/delete      	 	controllers.Publishers.delete(id:Long)
+
+#book
+GET     /books                  			controllers.Books.list(p:Int ?= 0, s ?= "title", o ?= "asc", f ?= "")
+
+GET     /books/new              			controllers.Books.create()
+POST    /books                  			controllers.Books.save()
+
+GET     /books/:id              			controllers.Books.edit(id:Long)
+POST    /books/:id             				controllers.Books.update(id:Long)
+
+POST    /books/:id/delete		      	 	controllers.Books.delete(id:Long)
+
+#catalogue
+GET    	/catalogues/:bookid          		controllers.Catalogues.list(bookid:Long, p:Int ?= 0, s ?= "barcode", o ?= "asc", f ?= "")
+GET     /catalogues/new/:bookid             controllers.Catalogues.create(bookid:Long)
+POST    /catalogues/:bookid                 controllers.Catalogues.save(bookid:Long)
+
+GET     /catalogues/:id/edit              			controllers.Catalogues.edit(id:Long)
+POST    /catalogues/:id/:bookid/update             			controllers.Catalogues.update(id:Long,bookid:Long)
+
+POST    /catalogues/:id/delete		      	 	controllers.Catalogues.delete(id:Long)
+GET     /catalogues/printbarcodes/:barcodestext	controllers.Catalogues.printBarcodes(barcodestext:String)
+
+#author
+GET     /authors                  			controllers.Authors.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/ajax/authors						controllers.Authors.listajax()
+GET     /authors/new              			controllers.Authors.create()
+POST    /authors                  			controllers.Authors.save()
+
+GET     /authors/:id              			controllers.Authors.edit(id:Long)
+POST    /authors/:id             			controllers.Authors.update(id:Long)
+
+POST    /authors/:id/delete		      	 	controllers.Authors.delete(id:Long)
+#student
+GET     /students                  			controllers.Students.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+GET     /students/new              			controllers.Students.create()
+POST    /students                  			controllers.Students.save()
+
+GET     /students/:id              			controllers.Students.edit(id:Long)
+POST    /students/:id             			controllers.Students.update(id:Long)
+
+POST    /students/:id/delete		      	 	controllers.Students.delete(id:Long)
+
+#borrowing/returning transactions
+GET 	/borrowing									controllers.TransBorrowing.index()
+GET		/borrowing/studentinfo/:nim					controllers.TransBorrowing.getStudentInfo(nim:String)
+GET		/borrowing/cataloginfo/:barcode/:studentid	controllers.TransBorrowing.getCatalogeInfo(barcode:String,studentid:Long)
+POST	/borrowing/save/:studentId					controllers.TransBorrowing.save(studentId:Long)
+GET		/borrowing/resumeinfo/:catId				controllers.TransBorrowing.getResumeInfo(catId:Long)
+GET		/borrowing/borrowedcatalogue/:studentId		controllers.TransBorrowing.getBorrowedCatalogue(studentId:Long)
+GET		/borrowing/maxborrowedbook					controllers.TransBorrowing.getMaxBorrowedBook()
+
+#setting
+GET 	/settings									controllers.Settings.index()
+POST	/settings/save								controllers.Settings.save()
+GET		/settings/generatecatscode					controllers.Settings.generateCataloguesCode()
+
+#reports
+GET	/report/borrowedbooks					controllers.Reports.borrowedBooks()
+GET	/report/ajax/borrowedbook				controllers.Reports.listBorrowedBooks()
+GET	/report/returnedbooks					controllers.Reports.returnedBooks()
+GET	/report/ajax/returnedbook				controllers.Reports.listReturnedBooks()
+GET	/report/overduebooks					controllers.Reports.overdueBooks()
+GET	/report/ajax/overduebook				controllers.Reports.listOverdueBooks()
+
+# Javascript routing
+GET     /javascriptRoutes     controllers.Application.javascriptRoutes()
+
+GET /files/:file           					controllers.BarcodeImages.getFile(file: String)
+# Map static resources from the /public folder to the /public path
+GET     /assets/*file                       controllers.Assets.at(path="/public", file)
+
+

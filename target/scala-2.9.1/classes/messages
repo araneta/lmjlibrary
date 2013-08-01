@@ -1,0 +1,10 @@
+# Messages
+
+computers.list.title={0,choice,0#No computers|1#One computer|1<{0,number,integer} computers} found
+publishers.list.title={0,choice,0#No publishers|1#One publishers|1<{0,number,integer} publishers} found
+books.list.title={0,choice,0#No books|1#One books|1<{0,number,integer} books} found
+authors.list.title={0,choice,0#No authors|1#One authors|1<{0,number,integer} authors} found
+catalogues.list.title={0,choice,0#No catalogues|1#One catalogues|1<{0,number,integer} catalogues} found
+students.list.title={0,choice,0#No students|1#One students|1<{0,number,integer} students} found
+
+

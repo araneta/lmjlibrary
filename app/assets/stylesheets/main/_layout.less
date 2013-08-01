@@ -1,0 +1,49 @@
+// -----------------------------------
+// MAIN LAYOUT
+// -----------------------------------
+// author: mda@zenexity.com - 2011
+// -----------------------------------
+
+body {
+    & > header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;        
+    }
+    & > nav {
+        position: absolute;
+        top: @headerHeight;
+        left: 0;
+        width: @drawerWidth;
+        bottom: 0;
+        box-sizing: border-box;
+    }
+    & > section {
+        position: absolute;
+        top: @headerHeight+10;
+        left: @drawerWidth;
+        right: 0;
+        bottom: 0;
+    }
+}
+#main{
+	padding:10px;
+}
+#main > header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @breadcrumbHeight;
+}
+
+#main > article {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    overflow: auto;
+}

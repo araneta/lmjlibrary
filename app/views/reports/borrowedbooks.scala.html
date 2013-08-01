@@ -1,0 +1,55 @@
+@scripts = {
+    <script src="@routes.Assets.at("javascripts/jquery-ui.js")" type="text/javascript" charset="utf-8"></script>
+    <script src="@routes.Assets.at("javascripts/jquery.dataTables.min.js")" type="text/javascript" charset="utf-8"></script>
+}
+@styles = {
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/demo_table_jui.css")">
+ 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/jquery-ui.css")">
+}
+
+@main(styles,scripts) {     
+    <h1 class="heading" id="homeTitle">List of Borrowed Books</h1>
+	<script type="text/javascript">
+	  /* Table initialisation */
+	  $(document).ready(function() {
+	    $('#borrowedbooks').dataTable( {
+	      "bProcessing": true,
+	      "aaSorting": [[ 0, "asc" ]],
+	      "bServerSide": true,
+	      "bJQueryUI": true,
+	      "sPaginationType": "full_numbers",
+	      "sAjaxSource": "@routes.Reports.listBorrowedBooks()",
+	      "sDom": '<"toolbar">frtip',
+	      "fnServerParams": function ( aoData ) {	    	  	
+	            aoData.push(  {"name": "seldate", "value": $("#tgl").val() } );
+        	}
+	    });
+	    $("div.toolbar").html('<span>Borrow Date :</span><input type="text" name="tgl" id="tgl" value="" />');
+	    $("#tgl").datepicker({
+	    	onClose: function( selectedDate ) {                
+                var oTable = $('#borrowedbooks').dataTable();
+                oTable.fnDraw();
+            }
+	    });
+	    $("#tgl").datepicker("option", "dateFormat", "dd-mm-yy");
+	  });
+	</script>
+	 
+	<table id="borrowedbooks" class='display'>
+	  <thead>
+	    <tr>
+	      <th>Borrow Date</th>
+	      <th>Barcode</th>
+	      <th>Title</th>
+	      <th>Author</th>
+	      <th>NIM</th>
+	      <th>Name</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    
+	  </tbody>
+	</table>
+}
+
+            
